@@ -73,7 +73,7 @@ public class SellOneItemTest
             }
             else if("99999".equals(barcode))
             {
-                display.setText("Product not found for 99999");
+                display.setText("Product not found for " + barcode);
             }
         }
     }
