@@ -2,6 +2,8 @@ package ca.jbrains.pos.test;
 
 import org.junit.Test;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,11 +57,7 @@ public class SellOneItemTest
     public void emptyBarcode() throws Exception
     {
         final Display display = new Display();
-        final Sale sale = new Sale(display, new HashMap<String, String>()
-        {{
-                put("12345", "$7.95");
-                put("23456", "$12.50");
-            }});
+        final Sale sale = new Sale(display, Collections.<String,String> emptyMap());
 
         sale.onBarcode("");
         assertEquals("Scan error: empty barcode", display.getText());
@@ -93,11 +91,13 @@ public class SellOneItemTest
 
         public void onBarcode(String barcode)
         {
+            // SMELL Refused bequest; move this up the call stack?
             if ("".equals(barcode))
             {
                 display.setText("Scan error: empty barcode");
                 return;
             }
+
             if (pricesByBarcode.containsKey(barcode))
             {
                 display.setText(pricesByBarcode.get(barcode));
