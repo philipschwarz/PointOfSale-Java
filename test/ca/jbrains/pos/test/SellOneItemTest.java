@@ -68,10 +68,16 @@ public class SellOneItemTest
     private static class Sale
     {
         private Display display;
+        private final Map<String, String> pricesByBarcode;
 
         private Sale(Display display)
         {
             this.display = display;
+            this.pricesByBarcode = new HashMap<String, String>()
+            {{
+                    put("12345", "$7.95");
+                    put("23456", "$12.50");
+                }};
         }
 
         public void onBarcode(String barcode)
@@ -82,12 +88,6 @@ public class SellOneItemTest
             }
             else
             {
-                Map<String, String> pricesByBarcode = new HashMap<String, String>()
-                {{
-                    put("12345", "$7.95");
-                    put("23456", "$12.50");
-                 }};
-
                 if (pricesByBarcode.containsKey(barcode))
                 {
                     display.setText(pricesByBarcode.get(barcode));
