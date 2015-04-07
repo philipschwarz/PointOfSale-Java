@@ -3,8 +3,6 @@ package ca.jbrains.pos.test;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -89,18 +87,39 @@ public class SellOneItemTest
             // SMELL Refused bequest; move this up the call stack?
             if ("".equals(barcode))
             {
-                display.setText("Scan error: empty barcode");
+                displayEmptyBarcodeMessage();
                 return;
             }
 
-            if (pricesByBarcode.containsKey(barcode))
+            String priceAsText = findPrice(barcode);
+            if (priceAsText == null)
             {
-                display.setText(pricesByBarcode.get(barcode));
+                displayProductNotFoundMessage(barcode);
             }
             else
             {
-                display.setText("Product not found for " + barcode);
+                displayPrice(priceAsText);
             }
+        }
+
+        private void displayPrice(String priceAsText)
+        {
+            display.setText(priceAsText);
+        }
+
+        private String findPrice(String barcode)
+        {
+            return pricesByBarcode.get(barcode);
+        }
+
+        private void displayProductNotFoundMessage(String barcode)
+        {
+            display.setText("Product not found for " + barcode);
+        }
+
+        private void displayEmptyBarcodeMessage()
+        {
+            display.setText("Scan error: empty barcode");
         }
     }
 }
