@@ -56,36 +56,6 @@ public class SellOneItemTest
         assertEquals("Scan error: empty barcode", display.getText());
     }
 
-    private static class Display
-    {
-        private String text;
-
-        public String getText()
-        {
-            return text;
-        }
-
-        public void setText(String text)
-        {
-            this.text = text;
-        }
-
-        public void displayPrice(String priceAsText)
-        {
-            setText(priceAsText);
-        }
-
-        public void displayProductNotFoundMessage(String barcode)
-        {
-            setText("Product not found for " + barcode);
-        }
-
-        public void displayEmptyBarcodeMessage()
-        {
-            setText("Scan error: empty barcode");
-        }
-    }
-
     private static class Sale
     {
         private final Catalogue catalogue;
