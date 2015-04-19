@@ -9,7 +9,7 @@ class Display
         return text;
     }
 
-    public void setText(String text)
+    private void setText(String text)
     {
         this.text = text;
     }
@@ -27,5 +27,10 @@ class Display
     public void displayEmptyBarcodeMessage()
     {
         setText("Scan error: empty barcode");
+    }
+
+    public void displayNoSaleInProgressMessage(Sale sale)
+    {
+        setText("No sale in progress. Try scanning a product.");
     }
 }
