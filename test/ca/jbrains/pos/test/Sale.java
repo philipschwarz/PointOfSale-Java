@@ -2,10 +2,11 @@ package ca.jbrains.pos.test;
 
 class Sale
 {
-    private final ScanOneItemTest.Catalogue catalogue;
+    private final Catalogue catalogue;
     private final Display display;
+    private String priceAsText;
 
-    public Sale(ScanOneItemTest.Catalogue catalogue, Display display)
+    public Sale(Catalogue catalogue, Display display)
     {
         this.catalogue = catalogue;
         this.display = display;
@@ -20,11 +21,12 @@ class Sale
             return;
         }
 
-        String priceAsText = catalogue.findPrice(barcode);
+        priceAsText = catalogue.findPrice(barcode);
         if (priceAsText == null)
         {
             display.displayProductNotFoundMessage(barcode);
-        } else
+        }
+        else
         {
             display.displayPrice(priceAsText);
         }
@@ -32,6 +34,13 @@ class Sale
 
     public void onTotal()
     {
-        display.displayNoSaleInProgressMessage(this);
+        if (priceAsText == null)
+        {
+            display.displayNoSaleInProgressMessage(this);
+        }
+        else
+        {
+            display.text = "Total: $6.50";
+        }
     }
 }

@@ -2,7 +2,7 @@ package ca.jbrains.pos.test;
 
 class Display
 {
-    private String text;
+    public String text;
 
     public String getText()
     {
