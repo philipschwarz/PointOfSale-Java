@@ -40,7 +40,7 @@ class Sale
         }
         else
         {
-            display.text = "Total: $6.50";
+            display.text = "Total: " + priceAsText;
         }
     }
 }

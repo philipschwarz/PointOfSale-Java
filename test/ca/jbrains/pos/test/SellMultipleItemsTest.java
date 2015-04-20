@@ -29,6 +29,6 @@ public class SellMultipleItemsTest
 
         sale.onTotal();
 
-        Assert.assertEquals("$6.50", display.getText());
+        Assert.assertEquals("Total: $6.50", display.getText());
     }
 }
